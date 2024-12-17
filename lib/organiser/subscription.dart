@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:isports/models/subscription_model.dart';
 import 'package:isports/organiser/payment_details.dart';
 import 'package:isports/shared/commonWidgets.dart';
@@ -82,15 +83,10 @@ class _OrganizationSubscriptionState extends State<OrganizationSubscription> {
               _buildSubscription(subscriptions[Plans.pro]!),
               SizedBox(height: 24),
               PrimaryButton(
-                  text: 'Next',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OrganizerPaymentDetails(
-                                subscriptionModel:
-                                    subscriptions[selectedPlan]!)));
-                  }),
+                text: 'Next',
+                onTap: () => Get.to(OrganizerPaymentDetails(
+                    subscriptionModel: subscriptions[selectedPlan]!)),
+              ),
               SizedBox(height: 50),
             ],
           ),

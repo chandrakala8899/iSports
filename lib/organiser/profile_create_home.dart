@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:isports/organiser/create_account.dart';
 import 'package:isports/player/skill_set.dart';
 import 'package:isports/shared/commonWidgets.dart';
+import 'package:isports/shared/constants.dart';
 import 'package:isports/shared/primary_button.dart';
 import 'package:isports/shared/selection_item_chip.dart';
 
@@ -13,17 +15,13 @@ class OrganizerProfileCreate extends StatefulWidget {
 }
 
 class _OrganizerProfileCreateState extends State<OrganizerProfileCreate> {
+  ProfileType profileType = ProfileType.individual;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SkillSet(),
-              ));
-        },
+        onPressed: () => Get.to(SkillSet()),
       ),
       appBar: AppBar(),
       body: Padding(
@@ -60,16 +58,19 @@ class _OrganizerProfileCreateState extends State<OrganizerProfileCreate> {
                       children: [
                         SelectionItemChip(
                             label: 'Individual',
-                            onTap: () {},
-                            isSelected: false),
+                            onTap: () => setProfileType(ProfileType.individual),
+                            isSelected: profileType == ProfileType.individual),
                         SelectionItemChip(
                             label: 'Team Account',
-                            onTap: () {},
-                            isSelected: false),
+                            onTap: () =>
+                                setProfileType(ProfileType.teamAccount),
+                            isSelected: profileType == ProfileType.teamAccount),
                         SelectionItemChip(
                             label: 'Event Organizer',
-                            onTap: () {},
-                            isSelected: true)
+                            onTap: () =>
+                                setProfileType(ProfileType.eventOrganizer),
+                            isSelected:
+                                profileType == ProfileType.eventOrganizer),
                       ],
                     ),
                   ],
@@ -80,19 +81,16 @@ class _OrganizerProfileCreateState extends State<OrganizerProfileCreate> {
               height: 50,
             ),
             PrimaryButton(
-              text: 'Next',
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrganizerCreateAccount(),
-                    ));
-              },
-              isDisabled: false,
-            ),
+                text: 'Next', onTap: () => Get.to(OrganizerCreateAccount())),
           ],
         ),
       ),
     );
+  }
+
+  void setProfileType(ProfileType type) {
+    setState(() {
+      profileType = type;
+    });
   }
 }

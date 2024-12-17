@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:isports/models/subscription_model.dart';
 import 'package:isports/organiser/setup_completed.dart';
 import 'package:isports/organiser/subscription.dart';
 import 'package:isports/shared/commonWidgets.dart';
+import 'package:isports/shared/constants.dart';
 import 'package:isports/shared/primary_button.dart';
 import 'package:isports/shared/selection_item_chip.dart';
 import 'package:isports/shared/theme_data.dart';
@@ -18,6 +20,8 @@ class OrganizerPaymentDetails extends StatefulWidget {
 }
 
 class _OrganizerPaymentDetailsState extends State<OrganizerPaymentDetails> {
+  PaymentMode _paymentMode = PaymentMode.creditOrDebit;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,10 +89,14 @@ class _OrganizerPaymentDetailsState extends State<OrganizerPaymentDetails> {
                         children: [
                           SelectionItemChip(
                               label: 'Credit/Debit',
-                              onTap: () {},
-                              isSelected: true),
+                              onTap: () =>
+                                  setPaymentMode(PaymentMode.creditOrDebit),
+                              isSelected:
+                                  _paymentMode == PaymentMode.creditOrDebit),
                           SelectionItemChip(
-                              label: 'UPI', onTap: () {}, isSelected: false),
+                              label: 'UPI',
+                              onTap: () => setPaymentMode(PaymentMode.upi),
+                              isSelected: _paymentMode == PaymentMode.upi),
                         ],
                       ),
                       SizedBox(height: 24),
@@ -135,14 +143,9 @@ class _OrganizerPaymentDetailsState extends State<OrganizerPaymentDetails> {
               ),
               SizedBox(height: 24),
               PrimaryButton(
-                  text: 'Pay now',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SetupCompleted(),
-                        ));
-                  }),
+                text: 'Pay now',
+                onTap: () => Get.to(SetupCompleted()),
+              ),
               SizedBox(height: 50),
             ],
           ),
@@ -175,5 +178,11 @@ class _OrganizerPaymentDetailsState extends State<OrganizerPaymentDetails> {
           ),
       ],
     );
+  }
+
+  void setPaymentMode(PaymentMode mode) {
+    setState(() {
+      _paymentMode = mode;
+    });
   }
 }

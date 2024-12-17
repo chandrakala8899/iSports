@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:isports/organiser/personal_info.dart';
 import 'package:isports/shared/commonWidgets.dart';
 import 'package:isports/shared/primary_button.dart';
@@ -102,14 +103,9 @@ class _OrganizerCreateAccountState extends State<OrganizerCreateAccount> {
                 height: 20,
               ),
               PrimaryButton(
-                  text: 'Next',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OrganizerPersonalInfo(),
-                        ));
-                  }),
+                text: 'Next',
+                onTap: () => Get.to(OrganizerPersonalInfo()),
+              ),
               SizedBox(
                 height: 50,
               ),
@@ -119,6 +115,4 @@ class _OrganizerCreateAccountState extends State<OrganizerCreateAccount> {
       ),
     );
   }
-
-  
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:isports/organiser/privacy_settings.dart';
 import 'package:isports/shared/commonWidgets.dart';
+import 'package:isports/shared/constants.dart';
 import 'package:isports/shared/primary_button.dart';
 import 'package:isports/shared/selection_item_chip.dart';
 import 'package:isports/shared/theme_data.dart';
@@ -13,6 +15,9 @@ class OrganizerPersonalInfo extends StatefulWidget {
 }
 
 class _OrganizerPersonalInfoState extends State<OrganizerPersonalInfo> {
+  List<EventsType> eventTypes = [];
+  List<SportType> sportTypes = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +52,7 @@ class _OrganizerPersonalInfoState extends State<OrganizerPersonalInfo> {
               ),
               PrimaryButton(
                   text: 'Next',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OrganizerPrivacySettings(),
-                        ));
-                  }),
+                  onTap: () => Get.to(OrganizerPrivacySettings())),
               SizedBox(
                 height: 50,
               ),
@@ -116,21 +115,37 @@ class _OrganizerPersonalInfoState extends State<OrganizerPersonalInfo> {
             Wrap(
               children: [
                 SelectionItemChip(
-                    label: 'Cricket', onTap: () {}, isSelected: true),
+                    label: 'Cricket',
+                    onTap: () => toggleSportType(SportType.cricket),
+                    isSelected: sportTypes.contains(SportType.cricket)),
                 SelectionItemChip(
-                    label: 'Football', onTap: () {}, isSelected: true),
+                    label: 'Football',
+                    onTap: () => toggleSportType(SportType.football),
+                    isSelected: sportTypes.contains(SportType.football)),
                 SelectionItemChip(
-                    label: 'Badminton', onTap: () {}, isSelected: false),
+                    label: 'Badminton',
+                    onTap: () => toggleSportType(SportType.badminton),
+                    isSelected: sportTypes.contains(SportType.badminton)),
                 SelectionItemChip(
-                    label: 'Kabaddi', onTap: () {}, isSelected: false),
+                    label: 'Kabaddi',
+                    onTap: () => toggleSportType(SportType.kabaddi),
+                    isSelected: sportTypes.contains(SportType.kabaddi)),
                 SelectionItemChip(
-                    label: 'Hockey', onTap: () {}, isSelected: false),
+                    label: 'Hockey',
+                    onTap: () => toggleSportType(SportType.hockey),
+                    isSelected: sportTypes.contains(SportType.hockey)),
                 SelectionItemChip(
-                    label: 'Basketball', onTap: () {}, isSelected: false),
+                    label: 'Basketball',
+                    onTap: () => toggleSportType(SportType.basketball),
+                    isSelected: sportTypes.contains(SportType.basketball)),
                 SelectionItemChip(
-                    label: 'Chess', onTap: () {}, isSelected: false),
+                    label: 'Chess',
+                    onTap: () => toggleSportType(SportType.chess),
+                    isSelected: sportTypes.contains(SportType.chess)),
                 SelectionItemChip(
-                    label: 'Table Tennis', onTap: () {}, isSelected: false)
+                    label: 'Table Tennis',
+                    onTap: () => toggleSportType(SportType.tableTennis),
+                    isSelected: sportTypes.contains(SportType.tableTennis)),
               ],
             ),
           ],
@@ -161,17 +176,34 @@ class _OrganizerPersonalInfoState extends State<OrganizerPersonalInfo> {
             Wrap(
               children: [
                 SelectionItemChip(
-                    label: 'Tournaments', onTap: () {}, isSelected: true),
+                    label: 'Tournaments',
+                    onTap: () =>
+                        toggleEventTypeSelection(EventsType.tournaments),
+                    isSelected: eventTypes.contains(EventsType.tournaments)),
                 SelectionItemChip(
-                    label: 'Leagues', onTap: () {}, isSelected: false),
+                    label: 'Leagues',
+                    onTap: () => toggleEventTypeSelection(EventsType.leagues),
+                    isSelected: eventTypes.contains(EventsType.leagues)),
                 SelectionItemChip(
-                    label: 'Charity Matches', onTap: () {}, isSelected: true),
+                    label: 'Charity Matches',
+                    onTap: () =>
+                        toggleEventTypeSelection(EventsType.charityMatches),
+                    isSelected: eventTypes.contains(EventsType.charityMatches)),
                 SelectionItemChip(
-                    label: 'Multi-Sports', onTap: () {}, isSelected: true),
+                    label: 'Multi-Sports',
+                    onTap: () =>
+                        toggleEventTypeSelection(EventsType.multiSports),
+                    isSelected: eventTypes.contains(EventsType.multiSports)),
                 SelectionItemChip(
-                    label: 'Friendly Matches', onTap: () {}, isSelected: false),
+                    label: 'Friendly Matches',
+                    onTap: () =>
+                        toggleEventTypeSelection(EventsType.friendlyMatches),
+                    isSelected:
+                        eventTypes.contains(EventsType.friendlyMatches)),
                 SelectionItemChip(
-                    label: 'Others', onTap: () {}, isSelected: false)
+                    label: 'Others',
+                    onTap: () => toggleEventTypeSelection(EventsType.others),
+                    isSelected: eventTypes.contains(EventsType.others)),
               ],
             ),
             SizedBox(
@@ -214,5 +246,25 @@ class _OrganizerPersonalInfoState extends State<OrganizerPersonalInfo> {
         ),
       ),
     );
+  }
+
+  void toggleEventTypeSelection(EventsType type) {
+    setState(() {
+      if (eventTypes.contains(type)) {
+        eventTypes.remove(type);
+      } else {
+        eventTypes.add(type);
+      }
+    });
+  }
+
+  void toggleSportType(SportType type) {
+    setState(() {
+      if (sportTypes.contains(type)) {
+        sportTypes.remove(type);
+      } else {
+        sportTypes.add(type);
+      }
+    });
   }
 }

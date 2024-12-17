@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:isports/organiser/profile_create_home.dart';
 import 'package:isports/shared/theme_data.dart';
 
@@ -11,6 +12,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: themeData, home: OrganizerProfileCreate());
+    return GetMaterialApp(
+      theme: themeData,
+      home: OrganizerProfileCreate(),
+    );
   }
 }
