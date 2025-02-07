@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isports/authentication/sucess_screen.dart';
 import 'package:isports/organiser/profile_create_home.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   void _submitOTP() {
     String otp = _controllers.map((controller) => controller.text).join();
     // Handle OTP verification logic here
- Get.to(() => ProfileCreate());
+ Get.to(() => Success_Screen());
     print("Entered OTP: $otp");
 
   }

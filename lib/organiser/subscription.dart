@@ -22,7 +22,7 @@ List<String> premiumPlanBenefits = [
   'Custom branding options for events'
 ];
 
-const List<String> proPlanBenefits = [
+List<String> proPlanBenefits = [
   'VIP access to exclusive event hosting opportunities',
   'Advanced marketing tools and strategies',
   'Featured listing for events to increase visibility',
@@ -64,7 +64,10 @@ class _OrganizationSubscriptionState extends State<OrganizationSubscription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: Icon(Icons.arrow_back,color: Colors.black,),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -112,6 +115,21 @@ class _OrganizationSubscriptionState extends State<OrganizationSubscription> {
     required List<String> benefits,
     required Plans planType,
   }) {
+    // Function to determine background color dynamically
+    Color getBackgroundColor() {
+      if (selectedPlan == planType) {
+        switch (planType) {
+          case Plans.basic:
+            return Color(0xFF4A75FF); 
+          case Plans.premium:
+            return Color(0xFFAACC46);
+          case Plans.pro:
+            return  Color(0xFFAACC46);
+        }
+      }
+      return Color(0xffF5F7F9); // Default color when not selected
+    }
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -121,17 +139,16 @@ class _OrganizationSubscriptionState extends State<OrganizationSubscription> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: selectedPlan == planType ? primaryColor : Color(0xffE8F0FE)),
+          borderRadius: BorderRadius.circular(15),
+          color: getBackgroundColor(), // Applying dynamic background color
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildPlanHeader(planType, name),
-              SizedBox(
-                height: 8,
-              ),
+              SizedBox(height: 8),
               _buildAmountSection(planType, yearlyAmount, monthlyAmount),
               SizedBox(height: 16),
               Text(
@@ -166,10 +183,7 @@ class _OrganizationSubscriptionState extends State<OrganizationSubscription> {
       children: [
         Expanded(child: getTitle(name, reverse: selectedPlan == planType)),
         selectedPlan == planType
-            ? Icon(
-                Icons.radio_button_checked,
-                color: Colors.white,
-              )
+            ? Icon(Icons.radio_button_checked, color: Colors.white)
             : Icon(Icons.radio_button_off_outlined)
       ],
     );

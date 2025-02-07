@@ -17,6 +17,7 @@ class _ProfileSetupState extends State<ProfileSetup> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
+   final TextEditingController _cityController = TextEditingController();
   String? _selectedGender = 'Male';
 
   Future<void> _selectDate(BuildContext context) async {
@@ -38,7 +39,9 @@ class _ProfileSetupState extends State<ProfileSetup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+       leading: Icon(Icons.arrow_back,color: Colors.black,), 
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -46,22 +49,20 @@ class _ProfileSetupState extends State<ProfileSetup> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               getProfileCreationHeader(
-                  title: 'Set up profile',
+                  title: 'General Details',
                   subtitle:
-                      'Personalize your profile to unlock a tailored sports experience!'),
+                      'set up profile picture'),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30),
-                child: Center(
-                  child: Container(
-                    height: 80,
-                    width: 80,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.grey[300]),
-                    child: Icon(
-                      Icons.person_outline,
-                      size: 40,
-                      color: primaryColor,
-                    ),
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.grey[300]),
+                  child: Icon(
+                    Icons.person_outline,
+                    size: 40,
+                    color: primaryColor,
                   ),
                 ),
               ),
@@ -124,7 +125,7 @@ class _ProfileSetupState extends State<ProfileSetup> {
                     getLabel("Gender*"),
                     SizedBox(height: 8), 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
                           children: [
@@ -175,23 +176,24 @@ class _ProfileSetupState extends State<ProfileSetup> {
                     SizedBox(
                       height: 16,
                     ),
+                      SizedBox(height: 16),
 
-                    getLabel("Tell Us about yourself*"),
+                    getLabel("City *"),
                     SizedBox(height: 8),
                     TextFormField(
-                      maxLines:
-                          5, // Allows multiple lines (5 lines in this case)
+                      controller: _cityController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(), // Adds a border
-                        contentPadding:
-                            EdgeInsets.all(12), // Adds padding inside the field
+                        hintText: "City",
+                        border: OutlineInputBorder(),
                       ),
+                      keyboardType: TextInputType.emailAddress,
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
+                    SizedBox(height: 16),
 
-                    getLabel("Country*"),
+
+                   
+
+                    getLabel("State*"),
                     SizedBox(height: 8),
                     DropdownMenu(
                   inputDecorationTheme: const InputDecorationTheme(
@@ -206,16 +208,23 @@ class _ProfileSetupState extends State<ProfileSetup> {
                     SizedBox(
                       height: 16,
                     ),
-
-                    getLabel("City"),
+                     getLabel("bio"),
                     SizedBox(height: 8),
                     TextFormField(
+                      maxLines:
+                          5, // Allows multiple lines (5 lines in this case)
                       decoration: InputDecoration(
-                        hintText: "City",
-                        border: OutlineInputBorder(),
+                        hintText: "Tell about yourself...",
+                        border: OutlineInputBorder(), // Adds a border
+                        contentPadding:
+                            EdgeInsets.all(12), // Adds padding inside the field
                       ),
-                      
                     ),
+                    SizedBox(
+                      height: 16,
+                    ),
+
+                   
                     
                   ],
                 ),

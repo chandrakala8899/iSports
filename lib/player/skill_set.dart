@@ -38,8 +38,8 @@ class _SkillSetState extends State<SkillSet> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xffE8F0FE)),
+                      color: Color(0xFFF5F7F9),
+                      ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -65,10 +65,14 @@ class _SkillSetState extends State<SkillSet> {
                                 label: 'Coach',
                                 onTap: () => setRoleType(RoleType.coach),
                                 isSelected: roleType == RoleType.coach),
+                                 SelectionItemChip(
+                                label: 'Umpire',
+                                onTap: () => setRoleType(RoleType.coach),
+                                isSelected: roleType == RoleType.coach),
                           ],
                         ),
                         SizedBox(height: 16),
-                        getLabel('Position*'),
+                        getLabel(' Primary Position*'),
                         SizedBox(height: 8),
                         DropdownMenu(
                             inputDecorationTheme: const InputDecorationTheme(
@@ -100,32 +104,54 @@ class _SkillSetState extends State<SkillSet> {
                             label: Text('Select'),
                             dropdownMenuEntries: []),
                         SizedBox(height: 16),
-                        getLabel('Select your experience level*'),
+
+
+                         getLabel('Experience Level*'),
                         SizedBox(height: 8),
-                        Wrap(
-                          children: [
-                            SelectionItemChip(
-                                label: 'Beginner',
-                                onTap: () => setExperienceLevel(
-                                    ExperienceLevel.beginner),
-                                isSelected: experienceLevel ==
-                                    ExperienceLevel.beginner),
-                            SelectionItemChip(
-                                label: 'Intermediate',
-                                onTap: () => setExperienceLevel(
-                                    ExperienceLevel.intermediate),
-                                isSelected: experienceLevel ==
-                                    ExperienceLevel.intermediate),
-                            SelectionItemChip(
-                                label: 'Advanced',
-                                onTap: () => setExperienceLevel(
-                                    ExperienceLevel.advanced),
-                                isSelected: experienceLevel ==
-                                    ExperienceLevel.advanced),
-                          ],
-                        ),
+                        DropdownMenu(
+                            inputDecorationTheme: const InputDecorationTheme(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                              ),
+                            ),
+                            width: double.infinity,
+                            trailingIcon: Icon(Icons.arrow_drop_down_sharp),
+                            label: Text('Select'),
+                            dropdownMenuEntries: []),
                         SizedBox(height: 16),
-                        getLabel('Team (if your team is already registered)'),
+                        // getLabel('Select your experience level*'),
+                        // SizedBox(height: 8),
+                        // Wrap(
+                        //   children: [
+                        //     SelectionItemChip(
+                        //         label: 'Beginner',
+                        //         onTap: () => setExperienceLevel(
+                        //             ExperienceLevel.beginner),
+                        //         isSelected: experienceLevel ==
+                        //             ExperienceLevel.beginner),
+                        //     SelectionItemChip(
+                        //         label: 'Intermediate',
+                        //         onTap: () => setExperienceLevel(
+                        //             ExperienceLevel.intermediate),
+                        //         isSelected: experienceLevel ==
+                        //             ExperienceLevel.intermediate),
+                        //     SelectionItemChip(
+                        //         label: 'Advanced',
+                        //         onTap: () => setExperienceLevel(
+                        //             ExperienceLevel.advanced),
+                        //         isSelected: experienceLevel ==
+                        //             ExperienceLevel.advanced),
+                        //   ],
+                        // ),
+
+
+
+
+                        SizedBox(height: 16),
+                        getLabel('Team'),
                         SizedBox(height: 8),
                         DropdownMenu(
                             inputDecorationTheme: const InputDecorationTheme(
@@ -175,24 +201,32 @@ class _SkillSetState extends State<SkillSet> {
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                   color: primaryColor),
-                            ))
+                            )),
+
+                            SizedBox(height: 8),
+         
+
+
                       ],
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
+               
                 if (!addSecondaryRole)
                   SecondaryButton(
-                      text: 'Add Secondary Role',
+                      text: ' Add Role',
                       onTap: () {
                         setState(() {
                           addSecondaryRole = true;
                         });
                       }),
                 if (addSecondaryRole) getSecondaryRoleWidget(),
-                SizedBox(height: 30),
+                   SizedBox(height: 20),
                 PrimaryButton(
                     text: 'Next', onTap: () => Get.to(() => PlayerPrivacySettings())),
+                  
+                
                 SizedBox(height: 50),
               ],
             ),

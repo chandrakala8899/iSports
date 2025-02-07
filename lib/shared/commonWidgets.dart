@@ -9,7 +9,7 @@ Widget getProfileCreationHeader(
       Text(
         title,
         style: TextStyle(
-            fontSize: 26, fontWeight: FontWeight.w600, color: primaryColor),
+            fontSize: 26, fontWeight: FontWeight.w600,color: Color(0xFF2A2B2F),),
       ),
       SizedBox(
         height: 12,

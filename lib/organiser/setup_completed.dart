@@ -29,7 +29,7 @@ class SetupCompleted extends StatelessWidget {
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  color: primaryColor),
+                  color: Color(0xFFAACC46)),
             ),
             SizedBox(height: 16),
             Text(

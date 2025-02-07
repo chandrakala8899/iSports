@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:isports/authentication/splash_screen.dart';
-import 'package:isports/organiser/profile_create_home.dart';
+import 'package:isports/models/subscription_model.dart';
+import 'package:isports/organiser/subscription.dart';
 import 'package:isports/shared/theme_data.dart';
-
-import 'individual_player_account/player_info.dart';
 import 'routes/app.page.dart';
 import 'routes/app.route.dart';
 
@@ -20,14 +18,15 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       theme: themeData,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.initial,
-      getPages: AppPages.routes,
-      home: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/cricketbat.png'),
-                  fit: BoxFit.cover)),
-        ),
+      // initialRoute: AppRoutes.initial,
+      // getPages: AppPages.routes,
+      // home: Container(
+      //     decoration: BoxDecoration(
+      //         image: DecorationImage(
+      //             image: AssetImage('assets/images/cricketbat.png'),
+      //             fit: BoxFit.cover)),
+      //   ),
+    home: OrganizationSubscription(),
     );
   }
 }

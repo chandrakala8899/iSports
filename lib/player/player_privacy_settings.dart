@@ -21,17 +21,23 @@ class _PlayerPrivacySettingsState extends State<PlayerPrivacySettings> {
   bool _showEmailAndPhoneNumber = false;
   bool _connectionRequestFromOthers = false;
   bool _allowSearch = false;
-  bool _receiveInvitations=false;
-  bool _willingToTravel=false;
+  bool _receiveInvitations = false;
+  bool _willingToTravel = false;
   bool _enableAlerts = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               getProfileCreationHeader(
                   title: 'Privacy Settings',
@@ -43,13 +49,12 @@ class _PlayerPrivacySettingsState extends State<PlayerPrivacySettings> {
               SizedBox(height: 24),
               _buildWhoCanSeeSection(),
               SizedBox(height: 24),
-              _buildShowAlertsOption(),
-              SizedBox(height: 24),
+              // _buildShowAlertsOption(),
+              // SizedBox(height: 24),
               PrimaryButton(
-                  text: 'Submit',
+                  text: 'Next',
                   onTap: () => Get.to(() => OrganizationSubscription())),
               SizedBox(height: 50),
-
             ],
           ),
         ),
@@ -87,7 +92,7 @@ class _PlayerPrivacySettingsState extends State<PlayerPrivacySettings> {
                     isSelected: _profileVisibilityType ==
                         ProfileVisibilityType.private),
                 SelectionItemChip(
-                    label: 'Only My Team',
+                    label: 'Only Team',
                     onTap: () =>
                         setProfileVisibility(ProfileVisibilityType.myTeam),
                     isSelected:
@@ -159,7 +164,6 @@ class _PlayerPrivacySettingsState extends State<PlayerPrivacySettings> {
         SizedBox(
           height: 16,
         ),
-
         Row(
           children: [
             Expanded(
@@ -188,8 +192,7 @@ class _PlayerPrivacySettingsState extends State<PlayerPrivacySettings> {
         SizedBox(
           height: 16,
         ),
-
-Row(
+        Row(
           children: [
             Expanded(
               child: Text(
@@ -242,6 +245,34 @@ Row(
             )
           ],
         ),
+        SizedBox(
+          height: 16,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Allow alerts via emails & in-app notifications',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff231F20)),
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Switch(
+              value: _allowSearch,
+              onChanged: (bool val) {
+                setState(() {
+                  _allowSearch = val;
+                });
+              },
+              activeColor: primaryColor,
+            )
+          ],
+        ),
       ],
     );
   }
@@ -269,7 +300,7 @@ Row(
                         setMessageAccessType(MessageAccessType.everyone),
                     isSelected: _accessType == MessageAccessType.everyone),
                 SelectionItemChip(
-                    label: 'Teams',
+                    label: 'Teammates',
                     onTap: () => setMessageAccessType(MessageAccessType.teams),
                     isSelected: _accessType == MessageAccessType.teams),
                 SelectionItemChip(
@@ -281,34 +312,6 @@ Row(
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildShowAlertsOption() {
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            'Allow alerts via emails & in-app notifications',
-            style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Color(0xff231F20)),
-          ),
-        ),
-        SizedBox(
-          width: 8,
-        ),
-        Switch(
-          value: _enableAlerts,
-          onChanged: (bool val) {
-            setState(() {
-              _enableAlerts = val;
-            });
-          },
-          activeColor: primaryColor,
-        )
-      ],
     );
   }
 

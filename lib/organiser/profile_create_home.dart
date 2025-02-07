@@ -29,9 +29,9 @@ class _ProfileCreateState extends State<ProfileCreate> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             getProfileCreationHeader(
-                title: 'Set up profile',
+                title: 'General Details',
                 subtitle:
-                    'Personalize your profile to unlock a tailored sports experience!'),
+                    'Set up profile picture'),
             SizedBox(
               height: 12,
             ),

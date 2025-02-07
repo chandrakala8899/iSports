@@ -41,7 +41,7 @@ class _OrganizerPaymentDetailsState extends State<OrganizerPaymentDetails> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: primaryColor),
+                    color:  Color(0xFFAACC46)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(

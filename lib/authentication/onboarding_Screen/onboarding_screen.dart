@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isports/authentication/mobile_number_screen.dart';
 import 'package:isports/shared/theme_data.dart';
-
-import '../../organiser/profile_create_home.dart';
 import 'UnbordingContent .dart';
 
 class OnboardingScreen extends StatefulWidget {
