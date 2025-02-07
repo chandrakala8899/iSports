@@ -52,7 +52,7 @@ class _OrganizerPersonalInfoState extends State<OrganizerPersonalInfo> {
               ),
               PrimaryButton(
                   text: 'Next',
-                  onTap: () => Get.to(OrganizerPrivacySettings())),
+                  onTap: () => Get.to(() => OrganizerPrivacySettings())),
               SizedBox(
                 height: 50,
               ),

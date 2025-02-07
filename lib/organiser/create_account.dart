@@ -13,6 +13,13 @@ class OrganizerCreateAccount extends StatefulWidget {
 }
 
 class _OrganizerCreateAccountState extends State<OrganizerCreateAccount> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _urlController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +42,7 @@ class _OrganizerCreateAccountState extends State<OrganizerCreateAccount> {
                     width: 80,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: secondaryColor,
+                      color: Colors.grey[300],
                     ),
                     child: Icon(
                       Icons.person_outline,
@@ -45,66 +52,107 @@ class _OrganizerCreateAccountState extends State<OrganizerCreateAccount> {
                   ),
                 ),
               ),
-              getLabel('Name of Organization*'),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(decoration: getInputDecoration('Organization name')),
-              SizedBox(
-                height: 16,
-              ),
-              getLabel('Email (Optional)'),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(decoration: getInputDecoration('Email')),
-              SizedBox(
-                height: 16,
-              ),
-              getLabel('Mobile Number'),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(decoration: getInputDecoration('Mobile Number')),
-              SizedBox(
-                height: 16,
-              ),
-              getLabel('Role in the Organization*'),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(decoration: getInputDecoration('Role')),
-              SizedBox(
-                height: 16,
-              ),
-              getLabel('Organization Website (optional)'),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(decoration: getInputDecoration('Website URL')),
-              SizedBox(
-                height: 16,
-              ),
-              getLabel('Years of Experience*'),
-              SizedBox(
-                height: 8,
-              ),
-              DropdownMenu(
-                  inputDecorationTheme: const InputDecorationTheme(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
-                  width: double.infinity,
-                  trailingIcon: Icon(Icons.arrow_drop_down_sharp),
-                  label: Text('Select'),
-                  dropdownMenuEntries: []),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      getLabel("Name of Organisation*"),
+                      SizedBox(height: 8), // Small gap before input
+                      TextFormField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          hintText: "Organisation Name",
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your full name";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 16),
+
+                      getLabel("Email(Optional)"),
+                      SizedBox(height: 8),
+                      TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          hintText: "Email",
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(height: 16),
+
+                      getLabel("Mobile Number"),
+                      SizedBox(height: 8),
+                      TextFormField(
+                        controller: _mobileController,
+                        decoration: InputDecoration(
+                          hintText: "Mobile Number",
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.phone,
+                      ),
+                      SizedBox(height: 16),
+
+                      getLabel("Role in the Organisation*"),
+                      SizedBox(height: 8), // Small gap before input
+                      TextFormField(
+                        controller: _roleController,
+                        decoration: InputDecoration(
+                          hintText: "Role",
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your Role";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 16),
+
+                      getLabel("Organisation Website(Optional)"),
+                      SizedBox(height: 8),
+                      TextFormField(
+                        controller: _urlController,
+                        decoration: InputDecoration(
+                          hintText: "Website URL",
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(height: 16),
+
+                      getLabel("Years Of Experience*"),
+                      SizedBox(height: 8), // Small gap before input
+                      DropdownMenu(
+                          inputDecorationTheme: const InputDecorationTheme(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                          ),
+                          width: double.infinity,
+                          trailingIcon: Icon(Icons.arrow_drop_down_sharp),
+                          label: Text('Select'),
+                          dropdownMenuEntries: []),
+                      SizedBox(height: 16),
+                    ],
+                  )),
               SizedBox(
                 height: 20,
               ),
               PrimaryButton(
                 text: 'Next',
-                onTap: () => Get.to(OrganizerPersonalInfo()),
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    Get.to(() => OrganizerPersonalInfo());
+                  }
+                },
               ),
               SizedBox(
                 height: 50,

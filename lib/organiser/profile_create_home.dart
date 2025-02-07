@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:isports/organiser/create_account.dart';
-import 'package:isports/player/skill_set.dart';
 import 'package:isports/shared/commonWidgets.dart';
 import 'package:isports/shared/constants.dart';
 import 'package:isports/shared/primary_button.dart';
 import 'package:isports/shared/selection_item_chip.dart';
+import 'package:isports/team/team_profile.dart';
 
-class OrganizerProfileCreate extends StatefulWidget {
-  const OrganizerProfileCreate({super.key});
+import '../player/profile_setup.dart';
+
+class ProfileCreate extends StatefulWidget {
+  const ProfileCreate({super.key});
 
   @override
-  State<OrganizerProfileCreate> createState() => _OrganizerProfileCreateState();
+  State<ProfileCreate> createState() => _ProfileCreateState();
 }
 
-class _OrganizerProfileCreateState extends State<OrganizerProfileCreate> {
+class _ProfileCreateState extends State<ProfileCreate> {
   ProfileType profileType = ProfileType.individual;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(SkillSet()),
-      ),
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -81,7 +80,18 @@ class _OrganizerProfileCreateState extends State<OrganizerProfileCreate> {
               height: 50,
             ),
             PrimaryButton(
-                text: 'Next', onTap: () => Get.to(OrganizerCreateAccount())),
+              text: 'Next',
+              //onTap: () => Get.to(OrganizerCreateAccount())
+              onTap: () {
+                if (profileType == ProfileType.individual) {
+                  Get.to(() => ProfileSetup());
+                } else if (profileType == ProfileType.teamAccount) {
+                  Get.to(() => TeamProfile());
+                } else {
+                  Get.to(() => OrganizerCreateAccount());
+                }
+              },
+            ),
           ],
         ),
       ),

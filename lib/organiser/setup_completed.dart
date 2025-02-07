@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:isports/individual_player_account/player_info.dart';
 import 'package:isports/shared/primary_button.dart';
 import 'package:isports/shared/theme_data.dart';
 
@@ -8,6 +10,7 @@ class SetupCompleted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -38,7 +41,9 @@ class SetupCompleted extends StatelessWidget {
                   color: primaryColor),
             ),
             SizedBox(height: 24),
-            PrimaryButton(text: 'Explore', onTap: () {})
+            PrimaryButton(text: 'Explore', onTap: () {
+              Get.to(() => ProfileScreen());
+            })
           ],
         ),
       ),

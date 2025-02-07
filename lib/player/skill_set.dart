@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:isports/shared/commonWidgets.dart';
 import 'package:isports/shared/primary_button.dart';
 import 'package:isports/shared/secondary_button.dart';
 import 'package:isports/shared/selection_item_chip.dart';
 import 'package:isports/shared/theme_data.dart';
+
+import '../shared/constants.dart';
+import 'player_privacy_settings.dart';
 
 class SkillSet extends StatefulWidget {
   const SkillSet({super.key});
@@ -14,6 +18,9 @@ class SkillSet extends StatefulWidget {
 
 class _SkillSetState extends State<SkillSet> {
   bool addSecondaryRole = false;
+  RoleType roleType = RoleType.player;
+  ExperienceLevel experienceLevel = ExperienceLevel.beginner;
+  CoachingLevel coachingLevel = CoachingLevel.junior;
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +59,12 @@ class _SkillSetState extends State<SkillSet> {
                           children: [
                             SelectionItemChip(
                                 label: 'Player',
-                                onTap: () {},
-                                isSelected: true),
+                                onTap: () => setRoleType(RoleType.player),
+                                isSelected: roleType == RoleType.player),
                             SelectionItemChip(
                                 label: 'Coach',
-                                onTap: () {},
-                                isSelected: false),
+                                onTap: () => setRoleType(RoleType.coach),
+                                isSelected: roleType == RoleType.coach),
                           ],
                         ),
                         SizedBox(height: 16),
@@ -99,16 +106,22 @@ class _SkillSetState extends State<SkillSet> {
                           children: [
                             SelectionItemChip(
                                 label: 'Beginner',
-                                onTap: () {},
-                                isSelected: true),
+                                onTap: () => setExperienceLevel(
+                                    ExperienceLevel.beginner),
+                                isSelected: experienceLevel ==
+                                    ExperienceLevel.beginner),
                             SelectionItemChip(
                                 label: 'Intermediate',
-                                onTap: () {},
-                                isSelected: false),
+                                onTap: () => setExperienceLevel(
+                                    ExperienceLevel.intermediate),
+                                isSelected: experienceLevel ==
+                                    ExperienceLevel.intermediate),
                             SelectionItemChip(
                                 label: 'Advanced',
-                                onTap: () {},
-                                isSelected: false),
+                                onTap: () => setExperienceLevel(
+                                    ExperienceLevel.advanced),
+                                isSelected: experienceLevel ==
+                                    ExperienceLevel.advanced),
                           ],
                         ),
                         SizedBox(height: 16),
@@ -178,7 +191,8 @@ class _SkillSetState extends State<SkillSet> {
                       }),
                 if (addSecondaryRole) getSecondaryRoleWidget(),
                 SizedBox(height: 30),
-                PrimaryButton(text: 'Add Secondary Role', onTap: () {}),
+                PrimaryButton(
+                    text: 'Next', onTap: () => Get.to(() => PlayerPrivacySettings())),
                 SizedBox(height: 50),
               ],
             ),
@@ -217,9 +231,13 @@ class _SkillSetState extends State<SkillSet> {
               Wrap(
                 children: [
                   SelectionItemChip(
-                      label: 'Player', onTap: () {}, isSelected: true),
+                      label: 'Player',
+                      onTap: () => setRoleType(RoleType.player),
+                      isSelected: roleType == RoleType.player),
                   SelectionItemChip(
-                      label: 'Coach', onTap: () {}, isSelected: false),
+                      label: 'Coach',
+                      onTap: () => setRoleType(RoleType.coach),
+                      isSelected: roleType == RoleType.coach),
                 ],
               ),
               SizedBox(height: 16),
@@ -258,11 +276,17 @@ class _SkillSetState extends State<SkillSet> {
               Wrap(
                 children: [
                   SelectionItemChip(
-                      label: 'Junior', onTap: () {}, isSelected: true),
+                      label: 'Junior',
+                      onTap: () => setCoachingLevel(CoachingLevel.junior),
+                      isSelected: coachingLevel == CoachingLevel.junior),
                   SelectionItemChip(
-                      label: 'Intermediate', onTap: () {}, isSelected: false),
+                      label: 'Intermediate',
+                      onTap: () => setCoachingLevel(CoachingLevel.intermediate),
+                      isSelected: coachingLevel == CoachingLevel.intermediate),
                   SelectionItemChip(
-                      label: 'Professional', onTap: () {}, isSelected: false),
+                      label: 'Professional',
+                      onTap: () => setCoachingLevel(CoachingLevel.professional),
+                      isSelected: coachingLevel == CoachingLevel.professional),
                 ],
               ),
               SizedBox(height: 16),
@@ -352,5 +376,23 @@ class _SkillSetState extends State<SkillSet> {
                 color: Colors.red, size: 24)),
       ),
     ]);
+  }
+
+  void setRoleType(RoleType type) {
+    setState(() {
+      roleType = type;
+    });
+  }
+
+  void setExperienceLevel(ExperienceLevel type) {
+    setState(() {
+      experienceLevel = type;
+    });
+  }
+
+  void setCoachingLevel(CoachingLevel type) {
+    setState(() {
+      coachingLevel = type;
+    });
   }
 }

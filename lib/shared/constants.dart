@@ -9,6 +9,8 @@ enum EventsType {
   others
 }
 
+
+
 enum SportType {
   cricket,
   football,
@@ -25,3 +27,9 @@ enum ProfileVisibilityType { public, private, myTeam }
 enum MessageAccessType { everyone, teams, none }
 
 enum PaymentMode { creditOrDebit, upi }
+
+enum RoleType{player,coach}
+
+enum ExperienceLevel{beginner,intermediate,advanced}
+
+enum CoachingLevel{junior,intermediate,professional}

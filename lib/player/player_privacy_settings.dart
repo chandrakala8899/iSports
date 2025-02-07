@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:isports/organiser/subscription.dart';
-import 'package:isports/shared/commonWidgets.dart';
-import 'package:isports/shared/constants.dart';
-import 'package:isports/shared/primary_button.dart';
-import 'package:isports/shared/selection_item_chip.dart';
-import 'package:isports/shared/theme_data.dart';
 
-class OrganizerPrivacySettings extends StatefulWidget {
-  const OrganizerPrivacySettings({super.key});
+import '../shared/commonWidgets.dart';
+import '../shared/constants.dart';
+import '../shared/primary_button.dart';
+import '../shared/selection_item_chip.dart';
+import '../shared/theme_data.dart';
+
+class PlayerPrivacySettings extends StatefulWidget {
+  const PlayerPrivacySettings({super.key});
 
   @override
-  State<OrganizerPrivacySettings> createState() =>
-      _OrganizerPrivacySettingsState();
+  State<PlayerPrivacySettings> createState() => _PlayerPrivacySettingsState();
 }
 
-class _OrganizerPrivacySettingsState extends State<OrganizerPrivacySettings> {
+class _PlayerPrivacySettingsState extends State<PlayerPrivacySettings> {
   ProfileVisibilityType _profileVisibilityType = ProfileVisibilityType.public;
-
   MessageAccessType _accessType = MessageAccessType.everyone;
-
   bool _showEmailAndPhoneNumber = false;
   bool _connectionRequestFromOthers = false;
   bool _allowSearch = false;
-
+  bool _receiveInvitations=false;
+  bool _willingToTravel=false;
   bool _enableAlerts = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +32,6 @@ class _OrganizerPrivacySettingsState extends State<OrganizerPrivacySettings> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               getProfileCreationHeader(
                   title: 'Privacy Settings',
@@ -45,13 +42,14 @@ class _OrganizerPrivacySettingsState extends State<OrganizerPrivacySettings> {
               _buildToggleOptions(),
               SizedBox(height: 24),
               _buildWhoCanSeeSection(),
-              SizedBox(height: 16),
+              SizedBox(height: 24),
               _buildShowAlertsOption(),
               SizedBox(height: 24),
               PrimaryButton(
                   text: 'Submit',
                   onTap: () => Get.to(() => OrganizationSubscription())),
               SizedBox(height: 50),
+
             ],
           ),
         ),
@@ -161,11 +159,69 @@ class _OrganizerPrivacySettingsState extends State<OrganizerPrivacySettings> {
         SizedBox(
           height: 16,
         ),
+
         Row(
           children: [
             Expanded(
               child: Text(
-                'Allow teams and players to find your profile when searching for event organizers or tournaments',
+                'Receive invitations to join events, tournaments',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff231F20)),
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Switch(
+              value: _receiveInvitations,
+              onChanged: (bool val) {
+                setState(() {
+                  _receiveInvitations = val;
+                });
+              },
+              activeColor: primaryColor,
+            )
+          ],
+        ),
+        SizedBox(
+          height: 16,
+        ),
+
+Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Willing to traveling for events or coaching assignments',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff231F20)),
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Switch(
+              value: _willingToTravel,
+              onChanged: (bool val) {
+                setState(() {
+                  _willingToTravel = val;
+                });
+              },
+              activeColor: primaryColor,
+            )
+          ],
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Allow teams or players to find your profile when searching for players or coaches',
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
